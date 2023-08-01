@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "@emotion/react"
+import CustomerChatBox from "./components"
+import customTheme from "./components/theme"
 
 function App() {
+
+  // const url = 'asd'
+  // const auth_token = 'asd'
+  const url = ''
+  const auth_token = ''
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <>
+  <ThemeProvider theme={customTheme}>
+  <CustomerChatBox url={url} authToken={auth_token} />
+  </ThemeProvider>
+  </>
+  )
 }
 
-export default App;
+export default App
