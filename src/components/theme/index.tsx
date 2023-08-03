@@ -5,6 +5,7 @@ const customTheme = createTheme({
     primary: {
       main: "#EC5C2A",
     },
+    
   },
 });
 export default customTheme;
