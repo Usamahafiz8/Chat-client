@@ -22,7 +22,7 @@ export const ApiList = {
       return `/conversations/messages/` + conversationId; //get
     },
     Users: {
-      startConversation: `/user/start-conversation`, //post
+      startConversation: `/user/auth/start-conversation `, //post
       getMassages: (conversationId: string) => {
         return `/conversations/messages/`+conversationId; //get
       },
