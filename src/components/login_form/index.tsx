@@ -59,7 +59,7 @@ const CustomerLogin = ({ url, authToken, onChatStart }: CustomerLoginProps) => {
 
   const handleLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
-
+    console.log({login})
     // If login is not enabled (url and authToken missing), validate and process the form
     if (!login) {
       // Perform client-side validation
@@ -83,6 +83,7 @@ const CustomerLogin = ({ url, authToken, onChatStart }: CustomerLoginProps) => {
       if (res.status === 400) {
         alert("Invalid credentials");
       } else {
+        console.log("HERE ")
         const resData = res.data;
         let id = resData.conversation._id;
         onChatStart(id, data.email);
@@ -90,6 +91,7 @@ const CustomerLogin = ({ url, authToken, onChatStart }: CustomerLoginProps) => {
     }
     // If login is enabled (url and authToken present), start conversation with admin
     else {
+      console.log("ELSE")
       const res = await CustonAxios.post(ApiList.Users.startConversation, {
         fullName: "", // Empty name
         email: "",   // Empty email
@@ -107,57 +109,59 @@ const CustomerLogin = ({ url, authToken, onChatStart }: CustomerLoginProps) => {
       }
     }
   };
+  
+//   // @ts-ignore
+//   const [socket, setSocket] = useState<SocketIOClient.Socket | null>(null);
+//   // const [conversationId, setConversationId] = useState<string>(''); // Set the conversation ID
+//   // const [senderEmail, setSenderEmail] = useState<string>(''); // Set the sender's email
+//   const [messages, setMessages] = useState<Message[]>([]); // Messages received from the socket
+//   // 64c8a915628d763bd3fccdf8 osama@gmail.com
+// const senderEmail = 'osama@gmail.com';
+// const conversationId = '64c8a915628d763bd3fccdf8'
+//   // setSenderEmail("qwer@gmail.com")
+//   // setConversationId('64c782167ceb23f0b58e2b00')
+//   useEffect(() => {
+//     const newSocket = io('http://localhost:8080'); // Replace with your socket server URL
+//     setSocket(newSocket);
 
-// @ts-ignore
-  const [socket, setSocket] = useState<SocketIOClient.Socket | null>(null);
-  // const [conversationId, setConversationId] = useState<string>(''); // Set the conversation ID
-  // const [senderEmail, setSenderEmail] = useState<string>(''); // Set the sender's email
-  const [messages, setMessages] = useState<Message[]>([]); // Messages received from the socket
-const senderEmail = 'qwer@gmail.com';
-const conversationId = '64c782167ceb23f0b58e2b00'
-  // setSenderEmail("qwer@gmail.com")
-  // setConversationId('64c782167ceb23f0b58e2b00')
-  useEffect(() => {
-    const newSocket = io('http://localhost:8080'); // Replace with your socket server URL
-    setSocket(newSocket);
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-  const [error, setError] = useState<string>(''); // Error message received from the socket
+//     return () => {
+//       newSocket.disconnect();
+//     };
+//   }, []);
+//   const [error, setError] = useState<string>(''); // Error message received from the socket
 
 
-  useEffect(() => {
-    if (!socket) return;
+//   useEffect(() => {
+//     if (!socket) return;
 
-    // Listen for incoming messages or error responses from the socket
-    socket.on('getuserMessagesResponse', (response: { messages?: Message[], error?: string }) => {
-      if (response.messages) {
-        setMessages(response.messages);
-        setError('');
-      } else if (response.error) {
-        setError(response.error);
-        setMessages([]);
-      }
-    });
+//     // Listen for incoming messages or error responses from the socket
+//     socket.on('getuserMessagesResponse', (response: { messages?: Message[], error?: string }) => {
+//       if (response.messages) {
+//         setMessages(response.messages);
+//         setError('');
+//       } else if (response.error) {
+//         setError(response.error);
+//         setMessages([]);
+//       }
+//     });
 
-    return () => {
-      socket.off('getuserMessagesResponse');
-    };
-  }, [socket]);
+//     return () => {
+//       socket.off('getuserMessagesResponse');
+//     };
+//   }, [socket]);
 
-  const handleGetMessages = () => {
-    if (!socket) return;
+//   const handleGetMessages = () => {
+//     if (!socket) return;
 
-    // Emit a message to request messages through the socket
-    socket.emit('getuserMessages', {
-      conversationId,
-      senderemail: senderEmail,
-      url: 'http://localhost:5000/api/get-data',
-      auth_token: '991e7836-c9c9-41ee-8968-aacb27cbef65',
-    });
-  };
+//     // Emit a message to request messages through the socket
+//     socket.emit('getuserMessages', {
+//       conversationId,
+//       senderemail: senderEmail,
+//       // url: 'http://localhost:5000/api/get-data',
+//       // auth_token: '991e7836-c9c9-41ee-8968-aacb27cbef65',
+//     });
+//   };
+
   return (
     <div
       style={{
@@ -170,7 +174,7 @@ const conversationId = '64c782167ceb23f0b58e2b00'
     >
    <div>
       {/* Your component UI */}
-      <button onClick={handleGetMessages}>Get Messages</button>
+      {/* <button onClick={handleGetMessages}>Get Messages</button>
       {error && <p>Error: {error}</p>}
       <div>
         <h2>Messages:</h2>
@@ -181,7 +185,7 @@ const conversationId = '64c782167ceb23f0b58e2b00'
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
       {login ? (
         <Button onClick={handleLogin} variant="outlined">

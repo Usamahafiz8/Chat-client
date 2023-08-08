@@ -5,8 +5,10 @@ interface ChatMessagesProps {
     conversationId: string; // Add a prop to pass the conversation ID
     Email: string; // Add a prop to pass the conversation ID
   }
-
+console.count("Called")
 export const ChatInterface = ({conversationId, Email}:ChatMessagesProps) => {
+  console.count("Re render ChatInterface")
+  
   return (
     <>
           <ChatMessages conversationId={conversationId} email={Email} />

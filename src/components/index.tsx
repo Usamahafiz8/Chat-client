@@ -18,6 +18,8 @@ const CustomerChatBox = ({ url, authToken }: ChatProps) => {
     setUserEmail(userEmail);
   };
 
+  console.count("CustomerChatBox")
+
   return (
     <ChatBoxLayout>
       {conversationID && userEmail ? (
