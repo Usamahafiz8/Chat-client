@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import { ApiList, CustonAxios } from "./../api/index.tsx";
 
-import io from 'socket.io-client';
 
 interface CustomerLoginProps {
   url: string;
